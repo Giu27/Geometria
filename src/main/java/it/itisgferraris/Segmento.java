@@ -36,7 +36,7 @@ public class Segmento {
         this.a = c;
     }
     public void Set_b(Punto c){
-        this.a = c;
+        this.b = c;
     }
     // distanza tra a ed b
     public double calcoladistanza_segmento(){
