@@ -138,4 +138,19 @@ public class Punto {
     public String toString(){
         return "X: " + x + "\nY: " + y + "\nZ: " + z;
     }
+
+    @Override
+    public boolean equals(Object o) { //Verifica se due punti hanno le stesse coordinate
+        if (o == null || getClass() != o.getClass()) { //Oggetti diversi non sono uguali, chi lo avrebbe mai detto
+            return false;
+        }
+
+        Punto punto = (Punto) o;
+
+        if (deltaX(punto) != 0 || deltaY(punto) != 0 || deltaZ(punto) != 0) {
+            return false;
+        }
+
+        return true;
+    }
 }

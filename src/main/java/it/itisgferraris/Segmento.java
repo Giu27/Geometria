@@ -112,4 +112,17 @@ public class Segmento {
         
         return null;
     }
+
+    public double calcolaAngolo(Segmento altro) {//Calcola l'angolo di due segmenti con un vertice comune
+        if (fine.equals(altro.inizio)) {
+            return fine.calcolaAngolo(inizio, altro.fine);
+        } else if (inizio.equals(altro.fine)) {
+            return inizio.calcolaAngolo(fine, altro.inizio);
+        } else if (fine.equals(altro.fine)) {
+            return fine.calcolaAngolo(inizio, altro.inizio);
+        } else if (inizio.equals(altro.inizio)){
+            return inizio.calcolaAngolo(fine, altro.fine);
+        }
+        return 0;
+    }
 }
