@@ -118,7 +118,7 @@ public class Punto {
         double moduloBC = calcolaDistanza(c);
 
         if (moduloBA == 0 || moduloBC == 0) {
-            return -1; //Uno dei punti è coincidente
+            return 0; //Uno dei punti è coincidente
         }
 
         double coseno = dotProduct / (moduloBA * moduloBC);
@@ -128,10 +128,9 @@ public class Punto {
         angle = Math.toDegrees(angle);
         int angle_approx = (int) angle;
 
-        if (Math.abs(angle_approx - angle) < 0.0000001) {
+        if (Math.abs(angle_approx - angle) < 0.000001) {
             angle = angle_approx;
         }
-
         return angle;
     }
 
