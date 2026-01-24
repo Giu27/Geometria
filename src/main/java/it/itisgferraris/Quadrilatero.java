@@ -1,5 +1,5 @@
 package it.itisgferraris;
 
-public class Quadrilatero {
+public class Quadrilatero extends Poligono{
     
 }

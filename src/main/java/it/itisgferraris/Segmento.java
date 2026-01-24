@@ -10,12 +10,12 @@ public class Segmento {
         this.fine = fine;
     }
 
-    public Segmento(double[] coordInizio, double[] coordFine){
+    public Segmento(double[] coordInizio, double[] coordFine) throws Exception{
         inizio = new Punto(coordInizio);
         fine = new Punto(coordFine);
     }
 
-    public Segmento(int[] coordInizio, int[] coordFine){
+    public Segmento(int[] coordInizio, int[] coordFine) throws Exception{
         inizio = new Punto(coordInizio);
         fine = new Punto(coordFine);
     }
@@ -33,11 +33,11 @@ public class Segmento {
         inizio = p;
     }
 
-    public void setInizio(double[] coords) {
+    public void setInizio(double[] coords) throws Exception{
         inizio.setCoords(coords);
     }
 
-    public void setInizio(int[] coords) {
+    public void setInizio(int[] coords) throws Exception{
         inizio.setCoords(coords);
     }
 
@@ -45,11 +45,11 @@ public class Segmento {
         fine = p;
     }
 
-    public void setFine(double[] coords) {
+    public void setFine(double[] coords) throws Exception{
         fine.setCoords(coords);
     }
 
-    public void setFine(int[] coords) {
+    public void setFine(int[] coords) throws Exception{
         fine.setCoords(coords);
     }
 

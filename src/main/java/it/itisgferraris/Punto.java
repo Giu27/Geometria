@@ -17,16 +17,24 @@ public class Punto {
         this.z = z;
     }
 
-    public Punto(double[] coords){ //Inizializza da array
+    public Punto(double[] coords) throws Exception{ //Inizializza da array
+        if (coords.length > 3) {
+            throw new Exception("Un punto riceve un massimo di tre coordinate!");
+        }
         x = coords[0];
         y = coords[1];
-        z = coords[2];
+        if (coords.length == 3)
+            z = coords[2];
     }
 
-    public Punto(int[] coords){
+    public Punto(int[] coords) throws Exception{
+        if (coords.length > 3) {
+            throw new Exception("Un punto riceve un massimo di tre coordinate!");
+        }
         x = coords[0];
         y = coords[1];
-        z = coords[2];
+        if (coords.length == 3)
+            z = coords[2];
     }
 
     public Punto(){ //Origine
@@ -64,16 +72,24 @@ public class Punto {
         this.z = z;
     }
 
-    public void setCoords(double[] coords) {
+    public void setCoords(double[] coords) throws Exception{
+        if (coords.length > 3) {
+            throw new Exception("Un punto riceve un massimo di tre coordinate!");
+        }
         x = coords[0];
         y = coords[1];
-        z = coords[2];
+        if (coords.length == 3)
+            z = coords[2];
     }
 
-    public void setCoords(int[] coords) {
+    public void setCoords(int[] coords) throws Exception{
+        if (coords.length > 3) {
+            throw new Exception("Un punto riceve un massimo di tre coordinate!");
+        }
         x = coords[0];
         y = coords[1];
-        z = coords[2];
+        if (coords.length == 3)
+            z = coords[2];
     }
 
     //Operazioni con altri punti
