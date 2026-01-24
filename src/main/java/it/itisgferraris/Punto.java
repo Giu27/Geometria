@@ -77,12 +77,62 @@ public class Punto {
     }
 
     //Operazioni con altri punti
+    public double deltaX(Punto altro) {
+        double delta = altro.x - x;
+        int delta_approx = (int) delta;
+        if (Math.abs(delta_approx - delta) < 0.0000001) {
+            delta = delta_approx;
+        }
+        return delta;
+    }
+
+    public double deltaY(Punto altro) {
+        double delta = altro.y - y;
+        int delta_approx = (int) delta;
+        if (Math.abs(delta_approx - delta) < 0.0000001) {
+            delta = delta_approx;
+        }
+        return delta;
+    }
+
+    public double deltaZ(Punto altro) {
+        double delta = altro.z - z;
+        int delta_approx = (int) delta;
+        if (Math.abs(delta_approx - delta) < 0.0000001) {
+            delta = delta_approx;
+        }
+        return delta;
+    }
+
     public double calcolaDistanza(Punto altro) { //Calcola la distanza fra sè e un altro punto
-        return Math.sqrt(Math.pow(altro.x - x, 2) + Math.pow(altro.y - y, 2) + Math.pow(altro.z - z, 2));
+        return Math.sqrt(Math.pow(deltaX(altro), 2) + Math.pow(deltaY(altro), 2) + Math.pow(deltaZ(altro), 2));
     }
 
     public Punto calcolaPuntoMedio(Punto altro) { //Restituisce il punto medio fra sè e un altro punto
         return new Punto((x + altro.x) / 2, (y + altro.y) / 2, (z + altro.z) / 2);
+    }
+
+    public double calcolaAngolo(Punto a, Punto c){//Calcola l'angolo, in gradi, fra tre punti, considerando sè stesso il vertice B in due vettori BA e BC
+        double dotProduct = (deltaX(a) * deltaX(c)) + (deltaY(a) * deltaY(c)) + (deltaZ(a) * deltaZ(c));
+        double moduloBA = calcolaDistanza(a);
+        double moduloBC = calcolaDistanza(c);
+
+        if (moduloBA == 0 || moduloBC == 0) {
+            return -1; //Uno dei punti è coincidente
+        }
+
+        double coseno = dotProduct / (moduloBA * moduloBC);
+        coseno = Math.max(-1, Math.min(coseno, 1)); //Limita il risultato per evitare errori
+
+        double angle = Math.acos(coseno);
+        angle = Math.toDegrees(angle);
+        int angle_approx = (int) angle;
+
+        if (Math.abs(angle_approx - angle) < 0.0000001) {
+            angle = angle_approx;
+        }
+
+        return angle;
     }
 
     @Override
