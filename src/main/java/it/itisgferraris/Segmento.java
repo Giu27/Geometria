@@ -62,7 +62,7 @@ public class Segmento {
         return inizio.calcolaPuntoMedio(fine);
     }
 
-    public boolean appartiene(Punto p) {
+    public boolean appartiene(Punto p) { //Determina se un punto appartiene al segmento
         double moduloAP = inizio.calcolaDistanza(p);
         
         if (inizio.calcolaAngolo(p, fine) != 0) {
@@ -74,5 +74,42 @@ public class Segmento {
         }
 
         return true;
+    }
+
+    public Punto intersezione(Segmento altro) { //Trova un punto di intersezione con un altro segmento. Si basa su sistemi lineari ed equazioni parametriche. Semplice su carta, meno in codice.
+        double d1x = inizio.deltaX(fine);
+        double d1y = inizio.deltaY(fine);
+        double d1z = inizio.deltaZ(fine);
+
+        double d2x = altro.inizio.deltaX(altro.fine);
+        double d2y = altro.inizio.deltaY(altro.fine);
+        double d2z = altro.inizio.deltaZ(altro.fine);
+
+        double r31x = altro.inizio.deltaX(inizio);
+        double r31y = altro.inizio.deltaY(inizio);
+        double r31z = altro.inizio.deltaZ(inizio);
+
+        //DOT PRODUCTS
+        double a = d1x * d1x + d1y * d1y + d1z * d1z;
+        double b = d1x * d2x + d1y * d2y + d1z * d2z;
+        double e = d2x * d2x + d2y * d2y + d2z * d2z;
+        double d = d1x * r31x + d1y * r31y + d1z * r31z;
+        double f = d2x * r31x + d2y * r31y + d2z * r31z;
+
+        double det = a * e - b * b; //determinante del sistema
+
+        if (det < 1e-9) { //Rette parallele o con troppe sovrapposizioni
+            return null;
+        }
+
+        double s = (b * f - d * e) / det; //s è parametro della equazione parametrica
+
+        Punto intersz = new Punto(inizio.getX() + s * d1x, inizio.getY() + s * d1y, inizio.getZ() + s * d1z);
+
+        if (appartiene(intersz) && altro.appartiene(intersz)) {
+            return intersz;
+        }
+        
+        return null;
     }
 }
