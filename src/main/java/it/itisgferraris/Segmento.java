@@ -47,11 +47,17 @@ public class Segmento {
 
     //Cos(x)
     public double Cos_segmento(){
+        if (calcoladistanza_segmento() == 0){
+            throw new IllegalArgumentException(" ERRORE");
+        }
         return a.distanze_x(b) / calcoladistanza_segmento();
     }
 
     //Sin(x)
     public double Sin_segmento(){
+        if (calcoladistanza_segmento() == 0){
+            throw new IllegalArgumentException(" ERRORE");
+        }
         return a.distanze_y(b) / calcoladistanza_segmento();
     }
 
