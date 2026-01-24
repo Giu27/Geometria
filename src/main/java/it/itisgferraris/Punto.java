@@ -75,10 +75,20 @@ public class Punto {
         y = coords[1];
         z = coords[2];
     }
+    //distanze tra ascisse e ordinate
+    public double distanze_x(Punto b){
+        return b.x - this.x;  
+    }
+    public double distanze_y(Punto b){
+        return b.y - this.y;  
+    }
+    public double distanze_z(Punto b){
+        return b.z - this.z;  
+    }
 
     //Operazioni con altri punti
     public double calcolaDistanza(Punto altro) { //Calcola la distanza fra sè e un altro punto
-        return Math.sqrt(Math.pow(altro.x - x, 2) + Math.pow(altro.y - y, 2) + Math.pow(altro.z - z, 2));
+        return Math.sqrt(Math.pow(distanze_x(altro), 2) + Math.pow(distanze_y(altro), 2) + Math.pow(distanze_z(altro), 2));
     }
 
     public Punto calcolaPuntoMedio(Punto altro) { //Restituisce il punto medio fra sè e un altro punto
