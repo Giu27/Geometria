@@ -125,4 +125,24 @@ public class Segmento {
         }
         return 0;
     }
+
+    @Override
+    public String toString(){
+        return "Punto di inizio:\n" + inizio + "\nPunto di fine:\n" + fine;
+    }
+
+    @Override
+    public boolean equals(Object o) { //Verifica se due segmenti hanno gli stessi punti
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Segmento segmento = (Segmento) o;
+
+        if (inizio != segmento.inizio || fine != segmento.fine) {
+            return false;
+        }
+
+        return true;
+    }
 }
