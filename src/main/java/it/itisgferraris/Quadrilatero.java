@@ -6,7 +6,7 @@ public class Quadrilatero extends Poligono {
     }
 
     @Override
-    public double calcolaArea() {
+    public double calcolaArea() { //Diagonale * diagonale * seno di angolo fra le diagonali. tutto diviso 2
         Segmento d1 = new Segmento(lati[0].getFine(), lati[2].getFine());
         Segmento d2 = new Segmento(lati[0].getInizio(), lati[2].getInizio());
         Punto centro = d1.intersezione(d2);
@@ -23,10 +23,31 @@ public class Quadrilatero extends Poligono {
         return area;
     }
 
-    @Override //TODO metodo classifica
-    public String classifica() {
-        return "TODO";
+    public boolean hasLatiOppostiUguali() {
+        return lati[0].calcolaLunghezza() == lati[2].calcolaLunghezza() && lati[1].calcolaLunghezza() == lati[3].calcolaLunghezza();
     }
 
-    
+    public boolean hasLatiOppostiParalleli() { //TODO Verificare i lati paralleli
+        return true;
+    }
+
+    @Override
+    public String classifica() {
+        if (isRegolare()) {
+            return "Quadrato";
+        };
+        if (hasAngoliUguali()) {
+            return "Rettangolo";
+        }
+        if (hasLatiUguali()) {
+            return "Rombo";
+        }
+        if (hasLatiOppostiUguali()) {
+            return "Parallelogramma";
+        }
+        if (hasLatiOppostiParalleli()) {
+            return "Trapezio";
+        }
+        return "Generico";
+    }
 }
