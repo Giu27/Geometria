@@ -113,6 +113,22 @@ public class Segmento {
         return null;
     }
 
+    public boolean paralleli(Segmento altro) {//Verifica se due segmenti sono paralleli
+        double d1x = inizio.deltaX(fine);
+        double d1y = inizio.deltaY(fine);
+        double d1z = inizio.deltaZ(fine);
+
+        double d2x = altro.inizio.deltaX(altro.fine);
+        double d2y = altro.inizio.deltaY(altro.fine);
+        double d2z = altro.inizio.deltaZ(altro.fine);
+
+        double cpx = d1y * d2z - d1z * d2y;
+        double cpy = d1z * d2x - d1x * d2z;
+        double cpz = d1x * d2y - d1y * d2x;
+
+        return Math.abs(cpx) < 0.0000001 && Math.abs(cpy) < 0.0000001 && Math.abs(cpz) < 0.0000001;
+    }
+
     public double calcolaAngolo(Segmento altro) {//Calcola l'angolo di due segmenti con un vertice comune
         if (fine.equals(altro.inizio)) {
             return fine.calcolaAngolo(inizio, altro.fine);
