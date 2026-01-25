@@ -163,10 +163,9 @@ public class Punto {
 
         Punto punto = (Punto) o;
 
-        if (deltaX(punto) != 0 || deltaY(punto) != 0 || deltaZ(punto) != 0) {
+        if (Math.abs(deltaX(punto)) > 0.000001 || Math.abs(deltaY(punto)) > 0.000001 || Math.abs(deltaZ(punto)) > 0.000001) {
             return false;
         }
-
         return true;
     }
 }

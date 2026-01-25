@@ -9,10 +9,19 @@ public abstract class Poligono {
             throw new Exception("Troppi pochi vertici!");
         }
         this.numLati = numLati;
+        this.lati = new Segmento[this.numLati];
         if (vertici.length != this.numLati) {
             throw new Exception("Troppi vertici!");
         }
 
+        if (!validaVertici(vertici)) {
+            throw new Exception("Vertici non validi!");
+        }
+
+        for (int i = 0; i < vertici.length - 1; i++) {
+            lati[i] = new Segmento(vertici[i], vertici[i + 1]);
+        }
+        lati[lati.length - 1] = new Segmento(vertici[vertici.length - 1], vertici[0]);
     }
 
     public int getNumLati() {
@@ -47,7 +56,7 @@ public abstract class Poligono {
             }
         }
 
-        if (lati[-1].calcolaLunghezza() != base.calcolaLunghezza() || lati[-1].calcolaAngolo(base) != angle) {
+        if (lati[lati.length - 1].calcolaLunghezza() != base.calcolaLunghezza() || lati[lati.length - 1].calcolaAngolo(base) != angle) {
             return false;
         }
 
@@ -59,14 +68,19 @@ public abstract class Poligono {
     public abstract String classifica();
 
     protected boolean validaVertici(Punto[] vertici) { //Controlla che dei vertici non si sovrappongano
-        for (int i = 0; i < numLati - 1; i++) {
-            for (int j = i + 1; j < numLati; j++) {
-                if (vertici[i].equals(vertici[j])) {
+        for (int i = 0; i < numLati; i++) {
+            for (int j = 0; j < numLati; j++) {
+                if (vertici[i].equals(vertici[j]) && i != j) {
                     return false;
                 }
             }
         }
 
         return true;
-    }   
+    }
+    
+    @Override
+    public String toString(){
+        return getClass().getName().substring(17) + ":\nTipo: " + classifica() + "\nPerimetro: " + calcolaPerimetro() + "\nArea: " + calcolaArea();
+    }
 }
