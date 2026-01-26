@@ -9,19 +9,12 @@ public class Quadrilatero extends Poligono {
     public double calcolaArea() { //Dovrei fare una classe vector visto che li uso ovunque..
         Segmento d1 = new Segmento(lati[0].getFine(), lati[2].getFine());
         Segmento d2 = new Segmento(lati[0].getInizio(), lati[2].getInizio());
-        double d1x = d1.getInizio().deltaX(d1.getFine());
-        double d1y = d1.getInizio().deltaY(d1.getFine());
-        double d1z = d1.getInizio().deltaZ(d1.getFine());
+        Vettore vd1 = new Vettore(d1);
+        Vettore vd2 = new Vettore(d2);
 
-        double d2x = d2.getInizio().deltaX(d2.getFine());
-        double d2y = d2.getInizio().deltaY(d2.getFine());
-        double d2z = d2.getInizio().deltaZ(d2.getFine());
+        Vettore c = vd1.cross(vd2);
 
-        double cpx = d1y * d2z - d1z * d2y;
-        double cpy = d1z * d2x - d1x * d2z;
-        double cpz = d1x * d2y - d1y * d2x;
-
-        double area = (Math.sqrt(cpx * cpx + cpy * cpy + cpz * cpz)) / 2;
+        double area = c.magnitudo() / 2;
         int area_approx = (int) area;
 
         if (Math.abs(area_approx - area) < 0.0000001) {

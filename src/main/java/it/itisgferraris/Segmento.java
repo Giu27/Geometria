@@ -77,24 +77,16 @@ public class Segmento {
     }
 
     public Punto intersezione(Segmento altro) { //Trova un punto di intersezione con un altro segmento. Si basa su sistemi lineari ed equazioni parametriche. Semplice su carta, meno in codice.
-        double d1x = inizio.deltaX(fine);
-        double d1y = inizio.deltaY(fine);
-        double d1z = inizio.deltaZ(fine);
-
-        double d2x = altro.inizio.deltaX(altro.fine);
-        double d2y = altro.inizio.deltaY(altro.fine);
-        double d2z = altro.inizio.deltaZ(altro.fine);
-
-        double r31x = altro.inizio.deltaX(inizio);
-        double r31y = altro.inizio.deltaY(inizio);
-        double r31z = altro.inizio.deltaZ(inizio);
+        Vettore d1 = new Vettore(inizio, fine);
+        Vettore d2 = new Vettore(altro.inizio, altro.fine);
+        Vettore r31 = new Vettore(altro.inizio, inizio);
 
         //DOT PRODUCTS
-        double a = d1x * d1x + d1y * d1y + d1z * d1z;
-        double b = d1x * d2x + d1y * d2y + d1z * d2z;
-        double e = d2x * d2x + d2y * d2y + d2z * d2z;
-        double d = d1x * r31x + d1y * r31y + d1z * r31z;
-        double f = d2x * r31x + d2y * r31y + d2z * r31z;
+        double a = d1.dot(d1);
+        double b = d1.dot(d2);
+        double e = d2.dot(d2);
+        double d = d1.dot(r31);
+        double f = d2.dot(r31);
 
         double det = a * e - b * b; //determinante del sistema
 
@@ -104,7 +96,7 @@ public class Segmento {
 
         double s = (b * f - d * e) / det; //s è parametro della equazione parametrica
 
-        Punto intersz = new Punto(inizio.getX() + s * d1x, inizio.getY() + s * d1y, inizio.getZ() + s * d1z);
+        Punto intersz = new Punto(inizio.getX() + s * d1.getX(), inizio.getY() + s * d1.getY(), inizio.getZ() + s * d1.getZ());
 
         if (appartiene(intersz) && altro.appartiene(intersz)) {
             return intersz;
@@ -114,19 +106,12 @@ public class Segmento {
     }
 
     public boolean paralleli(Segmento altro) {//Verifica se due segmenti sono paralleli
-        double d1x = inizio.deltaX(fine);
-        double d1y = inizio.deltaY(fine);
-        double d1z = inizio.deltaZ(fine);
+        Vettore d1 = new Vettore(inizio, fine);
+        Vettore d2 = new Vettore(altro.inizio, altro.fine);
 
-        double d2x = altro.inizio.deltaX(altro.fine);
-        double d2y = altro.inizio.deltaY(altro.fine);
-        double d2z = altro.inizio.deltaZ(altro.fine);
+        Vettore c = d1.cross(d2);
 
-        double cpx = d1y * d2z - d1z * d2y;
-        double cpy = d1z * d2x - d1x * d2z;
-        double cpz = d1x * d2y - d1y * d2x;
-
-        return Math.abs(cpx) < 0.0000001 && Math.abs(cpy) < 0.0000001 && Math.abs(cpz) < 0.0000001;
+        return Math.abs(c.getX()) < 0.0000001 && Math.abs(c.getY()) < 0.0000001 && Math.abs(c.getZ()) < 0.0000001;
     }
 
     public double calcolaAngolo(Segmento altro) {//Calcola l'angolo di due segmenti con un vertice comune

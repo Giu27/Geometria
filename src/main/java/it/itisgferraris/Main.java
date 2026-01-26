@@ -5,8 +5,8 @@ public class Main {
         //I PUNTI DI UN QUADRILATERO VANNO IN ORDINE ANTI ORARIO
         Punto p1 = new Punto();
         Punto p2 = new Punto(5, 0, 0);
-        Punto p3 = new Punto(4, 4, 0);
-        Punto p4 = new Punto(1, 4, 0);
+        Punto p3 = new Punto(5, 5, 0);
+        Punto p4 = new Punto(0, 5, 0);
         Punto[] vertici = new Punto[]{p1,p2,p3,p4};
         Quadrilatero q1;
 

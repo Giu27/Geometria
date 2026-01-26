@@ -121,7 +121,7 @@ public class Punto {
     }
 
     public double calcolaDistanza(Punto altro) { //Calcola la distanza fra sè e un altro punto
-        return Math.sqrt(Math.pow(deltaX(altro), 2) + Math.pow(deltaY(altro), 2) + Math.pow(deltaZ(altro), 2));
+        return new Vettore(this, altro).magnitudo();
     }
 
     public Punto calcolaPuntoMedio(Punto altro) { //Restituisce il punto medio fra sè e un altro punto
@@ -129,15 +129,15 @@ public class Punto {
     }
 
     public double calcolaAngolo(Punto a, Punto c){//Calcola l'angolo, in gradi, fra tre punti, considerando sè stesso il vertice B in due vettori BA e BC
-        double dotProduct = (deltaX(a) * deltaX(c)) + (deltaY(a) * deltaY(c)) + (deltaZ(a) * deltaZ(c));
-        double moduloBA = calcolaDistanza(a);
-        double moduloBC = calcolaDistanza(c);
+        Vettore BA = new Vettore(this, a);
+        Vettore BC = new Vettore(this, c);
+        double dotProduct = BA.dot(BC);
 
-        if (moduloBA == 0 || moduloBC == 0) {
+        if (BA.magnitudo() == 0 || BC.magnitudo() == 0) {
             return 0; //Uno dei punti è coincidente
         }
 
-        double coseno = dotProduct / (moduloBA * moduloBC);
+        double coseno = dotProduct / (BA.magnitudo() * BC.magnitudo());
         coseno = Math.max(-1, Math.min(coseno, 1)); //Limita il risultato per evitare errori
 
         double angle = Math.acos(coseno);
