@@ -1,7 +1,7 @@
 package it.itisgferraris;
 
 public class Vettore { //Tanto vale implementarli qui, visto che li suo ovunque..
-    Punto componenti; //Qui il punto è usato più come contenitore che altro, per evitare di riscrivere getter e setter identici. Non faccio ereditare però per evitare che il vettore erediti metodi di cui non ha bisogno
+    private Punto componenti; //Qui il punto è usato più come contenitore che altro, per evitare di riscrivere getter e setter identici. Non faccio ereditare però per evitare che il vettore erediti metodi di cui non ha bisogno
 
     public Vettore(){
         this.componenti = new Punto();
