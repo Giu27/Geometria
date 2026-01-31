@@ -39,6 +39,10 @@ public abstract class Poligono {
         return lati[index].calcolaLunghezza();
     }
 
+    public Segmento[] getLati() {
+        return lati;
+    }
+
     public double calcolaPerimetro() {
         double somma = 0;
         for (Segmento lato : lati) {

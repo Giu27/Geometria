@@ -1,5 +1,7 @@
 package it.itisgferraris;
 
+import java.util.Objects;
+
 public class Punto {
     private double x;
     private double y;
@@ -167,5 +169,10 @@ public class Punto {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
     }
 }

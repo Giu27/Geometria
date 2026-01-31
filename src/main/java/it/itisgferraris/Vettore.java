@@ -73,7 +73,7 @@ public class Vettore { //Tanto vale implementarli qui, visto che li suo ovunque.
         return getX() * v.getX() + getY() * v.getY() + getZ() * v.getZ();
     }
 
-    public Vettore cross(Vettore v) {
+    public Vettore cross(Vettore v) { //prodotto vettoriale
         return new Vettore(getY() * v.getZ() - getZ() * v.getY(), getZ() * v.getX() - getX() * v.getZ(), getX() * v.getY() - getY() * v.getX());
     }
 

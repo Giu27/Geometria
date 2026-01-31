@@ -1,5 +1,65 @@
 package it.itisgferraris;
 
-public class Solido {
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public abstract class Solido {
+    protected Poligono[] facce;
+    protected int[] numVerticiFacce; //Indica il numero di vertici di ogni faccia
+    protected int numFacce;
+    protected int numVertici; //Indica il numero di vertici complessivo
+    protected int numSpigoli;
+
+    protected abstract double calcolaVolume();
+    protected abstract double calcolaArea(); //Area totale!
+    protected abstract String classifica();
+
+    protected boolean verificaNumFacceVertici() { //Verifica che ogni vertice appartiene allo stesso numero di facce, viva le strutture dati
+        Map<Punto, Integer> contoFacce = new HashMap<>();
+        for (Poligono faccia : facce) {
+            Set<Punto> verticiFaccia = new HashSet<>();
+            for (Segmento s : faccia.getLati()) {
+                verticiFaccia.add(s.getInizio());
+                verticiFaccia.add(s.getFine());
+            }
+            for (Punto v : verticiFaccia) {
+                contoFacce.put(v, contoFacce.getOrDefault(v, 0) + 1);
+            }
+        }
+
+        if (contoFacce.isEmpty()) { //Non dovrebbe nemmeno essere possibile creare un solido vuoto, ma si sa mai
+            return false;
+        }
+
+        Iterator<Integer> counts = contoFacce.values().iterator();
+        int firstCount = counts.next();
+        while (counts.hasNext()) {
+            if (counts.next() != firstCount) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isRegolare() {
+        String tipo = facce[0].classifica();
+        for (Poligono faccia : facce) {
+            if (!faccia.isRegolare() || faccia.classifica() != tipo) {
+                return false;
+            }
+        }
+        if (!verificaNumFacceVertici()) {
+            return false;
+        }
+        return true;
+    }
     
+    @Override
+    public String toString(){
+        return getClass().getName().substring(17) + ":\nTipo: " + classifica() + "\nNumero facce: " + numFacce + "\nArea: " + calcolaArea() + "\nRegolare: " + isRegolare();
+    }
 }
