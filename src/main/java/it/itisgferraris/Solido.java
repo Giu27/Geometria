@@ -1,6 +1,6 @@
 package it.itisgferraris;
 
-import java.util.HashMap;
+import java.util.HashMap; //Whoops, tanti import che hanno bisogno di spiegazioni ahah
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,8 +14,15 @@ public abstract class Solido {
     protected int numSpigoli;
 
     protected abstract double calcolaVolume();
-    protected abstract double calcolaArea(); //Area totale!
     protected abstract String classifica();
+
+    protected double calcolaArea() {
+        double area = 0;
+        for (Poligono faccia : facce) {
+            area += faccia.calcolaArea();
+        }
+        return area;
+    }
 
     protected boolean verificaNumFacceVertici() { //Verifica che ogni vertice appartiene allo stesso numero di facce, viva le strutture dati
         Map<Punto, Integer> contoFacce = new HashMap<>();

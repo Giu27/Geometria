@@ -39,6 +39,12 @@ public class Punto {
             z = coords[2];
     }
 
+    public Punto(Punto altro, double z) {//Coordinate X e y di un punto esistenze ma con Z differente
+        this.x = altro.x;
+        this.y = altro.y;
+        this.z = z;
+    }
+
     public Punto(){ //Origine
         x = 0;
         y = 0;
