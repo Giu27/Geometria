@@ -16,12 +16,24 @@ public abstract class Solido {
     protected abstract double calcolaVolume();
     protected abstract String classifica();
 
-    protected double calcolaArea() {
+    public double calcolaArea() {
         double area = 0;
         for (Poligono faccia : facce) {
             area += faccia.calcolaArea();
         }
         return area;
+    }
+
+    public Poligono[] getFacce() {
+        return facce;
+    }
+
+    public Poligono getFaccia(int index) throws Exception{
+        if (index < 0 || index >= numFacce) {
+            throw new Exception("Indice non valido!");
+        }
+
+        return facce[index];
     }
 
     protected boolean verificaNumFacceVertici() { //Verifica che ogni vertice appartiene allo stesso numero di facce, viva le strutture dati
