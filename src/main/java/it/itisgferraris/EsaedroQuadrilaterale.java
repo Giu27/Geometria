@@ -4,7 +4,6 @@ public class EsaedroQuadrilaterale extends Solido{ //Un esaedro ha 6 facce, le p
     public EsaedroQuadrilaterale(Punto[] vertici) throws Exception{
         numFacce = 6;
         facce = new Poligono[numFacce];
-        numVerticiFacce = new int[]{4,4,4,4};
         numVertici = vertici.length;
         numSpigoli = numFacce + numVertici - 2;
         if (numSpigoli <= 0 || numSpigoli > 12) {

@@ -8,20 +8,23 @@ import java.util.Set;
 
 public abstract class Solido {
     protected Poligono[] facce;
-    protected int[] numVerticiFacce; //Indica il numero di vertici di ogni faccia
     protected int numFacce;
     protected int numVertici; //Indica il numero di vertici complessivo
     protected int numSpigoli;
 
-    protected abstract double calcolaVolume();
-    protected abstract String classifica();
+    public abstract double calcolaVolume();
+    public abstract String classifica();
 
-    public double calcolaArea() {
-        double area = 0;
-        for (Poligono faccia : facce) {
-            area += faccia.calcolaArea();
-        }
-        return area;
+    public int getNumFacce() {
+        return numFacce;
+    }
+
+    public int getNumVertici() {
+        return numVertici;
+    }
+
+    public int getNumSpigoli() {
+        return numSpigoli;
     }
 
     public Poligono[] getFacce() {
@@ -34,6 +37,14 @@ public abstract class Solido {
         }
 
         return facce[index];
+    }
+
+    public double calcolaArea() {
+        double area = 0;
+        for (Poligono faccia : facce) {
+            area += faccia.calcolaArea();
+        }
+        return area;
     }
 
     protected boolean verificaNumFacceVertici() { //Verifica che ogni vertice appartiene allo stesso numero di facce, viva le strutture dati
