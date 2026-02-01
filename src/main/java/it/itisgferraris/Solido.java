@@ -87,6 +87,6 @@ public abstract class Solido {
     
     @Override
     public String toString(){
-        return getClass().getName().substring(17) + ":\nTipo: " + classifica() + "\nNumero facce: " + numFacce + "\nArea: " + calcolaArea() + "\nRegolare: " + isRegolare();
+        return getClass().getName().substring(17) + ":\nTipo: " + classifica() + "\nNumero facce: " + numFacce + "\nArea: " + calcolaArea() + "\nVolume: " + calcolaVolume() + "\nRegolare: " + isRegolare();
     }
 }
