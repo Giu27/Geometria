@@ -19,7 +19,28 @@ public class EsaedroQuadrilaterale extends Solido{ //Un esaedro ha 6 facce, le p
     }
 
     public String classifica() {
-        return "Generico"; //TODO
+        if (isRegolare()) {
+            return "Cubo";
+        }
+        if (tuttiAngoliRetti() && (facce[0].classifica() == "Quadrato" || facce[0].classifica() == "Rettangolo")) {
+            return "Parallelepipedo Rettangolo";
+        }
+        if (facceStessoTipo() && facce[0].classifica() == "Parallelogramma") {
+            return "Parallelepipedo";
+        }
+        if (facceUguali() && facce[0].classifica() == "Rombo") {
+            return "Romboedro";
+        }
+        if (tuttiAngoliRetti()) {
+            return "Prisma Retto";
+        }
+        if (facceLateraliStessoTipo() && facceBasiStessoTipo() && facce[1].classifica() == "Parallelogramma") {
+            return "Prisma Obliquo";
+        }
+        if (facceLateraliStessoTipo() && facceBasiStessoTipo() && facce[1].classifica() == "Trapezio") {
+            return "Tronco di Piramide";
+        }
+        return "Generico/altro"; 
     }
 
     public double calcolaVolume() {
@@ -41,5 +62,38 @@ public class EsaedroQuadrilaterale extends Solido{ //Un esaedro ha 6 facce, le p
                 System.out.println("Qualcosa è andato molto storto");
             }
         return -1;
+    }
+
+    public boolean facceLateraliStessoTipo() {
+        String base = facce[1].classifica();
+        for (int i = 2; i < facce.length - 1; i++) {
+            if (facce[i].classifica() != base) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean facceBasiStessoTipo() {
+        return facce[0].classifica() == facce[5].classifica();
+    }
+
+    public boolean tuttiAngoliRetti() {
+        Object[] verticiBase0 = facce[0].getVertici();
+        Object[] verticiBase5 = facce[5].getVertici();
+        for (int i = 0; i < verticiBase0.length; i++) {
+            Punto a = (Punto)verticiBase0[i];
+            Punto b = (Punto)verticiBase5[i];
+            if (a.deltaX(b) != 0) {
+                return false;
+            }
+            if (a.deltaY(b) != 0) {
+                return false;
+            }
+            if (a.deltaZ(b) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

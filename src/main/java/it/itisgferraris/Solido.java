@@ -52,12 +52,32 @@ public abstract class Solido {
         return true;
     }
 
-    public boolean isRegolare() {
-        String tipo = facce[0].classifica();
+    public boolean facceUguali() {
+        Poligono base = facce[0];
         for (Poligono faccia : facce) {
-            if (!faccia.isRegolare() || faccia.classifica() != tipo) {
+            if (!faccia.equals(base)) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean facceStessoTipo() {
+        String base = facce[0].classifica();
+        for (Poligono faccia : facce) {
+            if (faccia.classifica() != base) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isRegolare() {
+        if (!facce[0].isRegolare()) {
+            return false;
+        }
+        if (!facceUguali()){
+            return false;
         }
         if (!verificaNumFacceVertici()) {
             return false;

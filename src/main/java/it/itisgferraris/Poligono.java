@@ -1,5 +1,8 @@
 package it.itisgferraris;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public abstract class Poligono {
     protected int numLati;
     protected Segmento[] lati;
@@ -29,6 +32,15 @@ public abstract class Poligono {
 
     public int getNumLati() {
         return numLati;
+    }
+
+    public Object[] getVertici() {
+        Set<Punto> vertici = new LinkedHashSet<>();
+        for (Segmento s : lati) {
+            vertici.add(s.getInizio());
+            vertici.add(s.getFine());
+        }
+        return vertici.toArray();
     }
 
     public double getLato(int index) throws Exception{
@@ -122,6 +134,29 @@ public abstract class Poligono {
             return false;
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Poligono poligono = (Poligono) o;
+
+        if (numLati != poligono.numLati) {
+            return false;
+        }
+        if (classifica() != poligono.classifica()) {
+            return false;
+        }
+        if (calcolaArea() - poligono.calcolaArea() > 0.000001) {
+            return false;
+        }
+        if (calcolaPerimetro() - poligono.calcolaPerimetro() > 0.000001) {
+            return false;
+        }
         return true;
     }
     
